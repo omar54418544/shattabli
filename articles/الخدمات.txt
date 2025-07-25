@@ -1,0 +1,25 @@
+الصفحة الرئيسية: index.html
+
+صفحة السباكة: plumbing-service.html
+
+صفحة الكهرباء: electricity-service.html
+
+صفحة النقاشة: painting-service.html
+
+صفحة النجارة: carpentry-service.html
+
+صفحة التكييف: ac-service.html
+
+صفحة النظافة: cleaning-service.html
+
+صفحة تنسيق الحدائق: gardening-service.html
+
+صفحة نقل الأثاث: moving-service.html
+
+صفحة تركيب الأرضيات: flooring-service.html
+
+صفحة الجبس بورد: gypsum-service.html
+
+صفحة كاميرات المراقبة: cameras-service.html
+
+صفحة مكافحة الحشرات: pest-control-service.html
