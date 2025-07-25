@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شطبلي - خدمات الصيانة والتشطيبات المتكاملة في مصر</title>
+    <meta name="description" content="شطبلي هو منصتك الأولى في مصر لطلب سباك، كهربائي، نجار، نقاش، وكل خدمات الصيانة والتشطيبات المنزلية. فنيون معتمدون بضغطة زر.">
+    <meta name="keywords" content="خدمات صيانة في مصر, سباك, كهربائي, شركة تشطيبات, نقل أثاث, كور دريل, قص خرسانة, شطبلي مصر">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Google Fonts (Cairo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Cairo', sans-serif; scroll-behavior: smooth; }
+        .hero-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/services/shatbli-painting-roller-wall.webp');
+            background-size: cover;
+            background-position: center;
+            filter: blur(2px);
+            transform: scale(1.05);
+            z-index: -1;
+        }
+        .hero-bg > div { position: relative; z-index: 1; }
+        #mobile-sidebar { transition: transform 0.3s ease-in-out; }
+        #mobile-menu-backdrop { transition: opacity 0.3s ease-in-out; }
+        
+        .slider-container {
+            position: relative;
+            max-width: 900px;
+            margin: auto;
+            border-radius: 1rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .slider-images {
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        .slider-slide {
+            display: none;
+            animation: fade 0.5s ease-in-out;
+        }
+        .slider-slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+        .slider-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .slider-prev, .slider-next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            background-color: rgba(0,0,0,0.4);
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+            user-select: none;
+        }
+        .slider-prev { right: 1rem; }
+        .slider-next { left: 1rem; }
+        .slider-prev:hover, .slider-next:hover {
+            background-color: rgba(0,0,0,0.7);
+        }
+        @keyframes fade {
+            from { opacity: .4 } 
+            to { opacity: 1 }
+        }
+        .thumbnail-gallery-container {
+            max-width: 900px;
+            margin: auto;
+            margin-top: 1rem;
+        }
+        .thumbnail-scroller {
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            flex-grow: 1;
+        }
+        .thumbnail-container {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+        }
+        .thumbnail-img {
+            width: 100px;
+            height: 65px;
+            object-fit: cover;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+            border: 3px solid transparent;
+            flex-shrink: 0;
+        }
+        .thumbnail-img:hover { opacity: 1; }
+        .thumbnail-img.active {
+            opacity: 1;
+            border-color: #2563eb;
+            transform: scale(1.1);
+        }
+        .thumb-scroll-btn {
+            background-color: #f3f4f6; border: 1px solid #d1d5db; border-radius: 50%;
+            width: 40px; height: 40px; font-size: 1.2rem; color: #374151; cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; transition: all 0.2s;
+        }
+        .thumb-scroll-btn:hover { background-color: #e5e7eb; }
+        .thumb-scroll-btn.hidden { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-link-animate {
+            position: relative;
+            transition: color 0.3s ease-in-out;
+        }
+        .nav-link-animate::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            right: 0;
+            background-color: #2563eb;
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link-animate:hover::after {
+            width: 100%;
+            left: 0;
+            right: auto;
+        }
+        .service-card-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .group:hover .service-card-icon {
+            transform: rotate(-15deg) scale(1.1);
+        }
+        .testimonial-card-animate {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .testimonial-card-animate:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .blog-card-animate {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .blog-card-animate:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+        }
+        /* Dropdown styles */
+        .dropdown .dropdown-menu {
+            display: none;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            transform: translateY(10px);
+            opacity: 0;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Header Section -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html">
+                        <img class="h-16 w-auto" src="images/logo.png" alt="شعار شطبلي" onerror="this.onerror=null; this.src='https://placehold.co/180x60/007bff/ffffff?text=شطبلي';">
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 space-x-reverse">
+                    <a href="#services" class="text-gray-700 hover:text-blue-600 text-md font-semibold nav-link-animate">خدماتنا</a>
+                    <a href="#blog" class="text-gray-700 hover:text-blue-600 text-md font-semibold nav-link-animate">المدونة</a>
+                    <a href="#why-us" class="text-gray-700 hover:text-blue-600 text-md font-semibold nav-link-animate">لماذا نحن؟</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 text-md font-semibold nav-link-animate">تواصل معنا</a>
+                </div>
+                
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="#" class="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow hover:shadow-lg transform hover:-translate-y-0.5">اطلب خدمة الآن</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button type="button" id="mobile-menu-button" class="bg-white p-2 rounded-md text-gray-500 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">افتح القائمة</span>
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu-container" class="md:hidden" role="dialog" aria-modal="true" style="display: none;">
+            <div id="mobile-menu-backdrop" class="fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity" style="opacity: 0;"></div>
+            <div id="mobile-sidebar" class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 transform translate-x-full">
+                <div class="flex items-center justify-between mb-8">
+                    <a href="index.html"><img class="h-14 w-auto" src="images/logo.png" alt="شعار شطبلي" onerror="this.onerror=null; this.src='https://placehold.co/150x60/007bff/ffffff?text=شطبلي';"></a>
+                    <button type="button" id="close-menu-button" class="-m-2.5 rounded-md p-2.5 text-gray-700 hover:text-gray-900">
+                        <span class="sr-only">إغلاق القائمة</span>
+                        <i class="fas fa-times fa-lg"></i>
+                    </button>
+                </div>
+                <div class="flow-root">
+                    <div class="-my-6 divide-y divide-gray-200">
+                        <div class="space-y-4 py-6">
+                            <a href="#services" class="mobile-menu-link flex items-center gap-x-3 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-100 hover:text-blue-600"><i class="fa-solid fa-wrench w-5 text-center text-gray-500"></i> خدماتنا</a>
+                            <a href="#blog" class="mobile-menu-link flex items-center gap-x-3 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-100 hover:text-blue-600"><i class="fa-solid fa-newspaper w-5 text-center text-gray-500"></i> المدونة</a>
+                            <a href="#why-us" class="mobile-menu-link flex items-center gap-x-3 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-100 hover:text-blue-600"><i class="fa-solid fa-circle-question w-5 text-center text-gray-500"></i> لماذا نحن؟</a>
+                            <a href="contact.html" class="mobile-menu-link flex items-center gap-x-3 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-100 hover:text-blue-600"><i class="fa-solid fa-envelope w-5 text-center text-gray-500"></i> تواصل معنا</a>
+                        </div>
+                        <div class="py-6">
+                            <a href="#" class="block w-full text-center bg-blue-600 text-white px-5 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg">اطلب خدمة الآن</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero-bg text-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center py-28 md:py-40">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-lg">كل خدمات بيتك في مكان واحد بمصر</h1>
+                <p class="mt-4 max-w-3xl mx-auto text-lg md:text-xl text-gray-200 drop-shadow-md">نوفر لك أمهر الفنيين في السباكة، الكهرباء، النجارة، وكل أعمال التشطيبات بضغطة زر.</p>
+                <div class="mt-8"><a href="#services" class="inline-block bg-blue-600 text-white px-10 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-xl">اكتشف خدماتنا</a></div>
+            </div>
+        </section>
+        
+        <section id="services" class="py-20 md:py-28 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in-section">
+                    <h2 class="text-3xl md:text-5xl font-bold text-gray-900">خدمات شطبلي المتكاملة</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">ابحث عن الخدمة التي تحتاجها بسهولة وسرعة في جميع أنحاء مصر.</p>
+                </div>
+                <!-- Services Grid: Changed to 3 columns on mobile -->
+                <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-8">
+                    <a href="services/plumbing-service.html" class="group block p-4 md:p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in-section"><div class="text-center"><div class="flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-100 mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-500"><i class="fa-solid fa-wrench fa-2x md:fa-3x text-blue-500 transition-all duration-300 group-hover:text-white service-card-icon"></i></div><h3 class="font-bold text-md md:text-lg text-gray-800 mb-1">سباكة</h3><p class="hidden sm:block text-sm text-gray-500">تأسيس وإصلاح.</p></div></a>
+                    <a href="services/electricity-service.html" class="group block p-4 md:p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in-section"><div class="text-center"><div class="flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-100 mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-500"><i class="fa-solid fa-bolt fa-2x md:fa-3x text-blue-500 transition-all duration-300 group-hover:text-white service-card-icon"></i></div><h3 class="font-bold text-md md:text-lg text-gray-800 mb-1">كهرباء</h3><p class="hidden sm:block text-sm text-gray-500">حلول آمنة.</p></div></a>
+                    <a href="services/painting-service.html" class="group block p-4 md:p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in-section"><div class="text-center"><div class="flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-100 mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-500"><i class="fa-solid fa-paint-roller fa-2x md:fa-3x text-blue-500 transition-all duration-300 group-hover:text-white service-card-icon"></i></div><h3 class="font-bold text-md md:text-lg text-gray-800 mb-1">نقاشة</h3><p class="hidden sm:block text-sm text-gray-500">تشطيبات عصرية.</p></div></a>
+                    <a href="services/carpentry-service.html" class="group block p-4 md:p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in-section"><div class="text-center"><div class="flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-100 mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-500"><i class="fa-solid fa-hammer fa-2x md:fa-3x text-blue-500 transition-all duration-300 group-hover:text-white service-card-icon"></i></div><h3 class="font-bold text-md md:text-lg text-gray-800 mb-1">نجارة</h3><p class="hidden sm:block text-sm text-gray-500">تركيب وتصليح.</p></div></a>
+                    <a href="services/ac-service.html" class="group block p-4 md:p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in-section"><div class="text-center"><div class="flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-100 mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-500"><i class="fa-solid fa-snowflake fa-2x md:fa-3x text-blue-500 transition-all duration-300 group-hover:text-white service-card-icon"></i></div><h3 class="font-bold text-md md:text-lg text-gray-800 mb-1">تكييف</h3><p class="hidden sm:block text-sm text-gray-500">صيانة وتركيب.</p></div></a>
+                    <a href="services/cleaning-service.html" class="group block p-4 md:p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in-section"><div class="text-center"><div class="flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-100 mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-500"><i class="fa-solid fa-broom fa-2x md:fa-3x text-blue-500 transition-all duration-300 group-hover:text-white service-card-icon"></i></div><h3 class="font-bold text-md md:text-lg text-gray-800 mb-1">نظافة</h3><p class="hidden sm:block text-sm text-gray-500">تنظيف عميق.</p></div></a>
+                    <a href="services/gardening-service.html" class="group block p-4 md:p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in-section"><div class="text-center"><div class="flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-100 mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-500"><i class="fa-solid fa-seedling fa-2x md:fa-3x text-blue-500 transition-all duration-300 group-hover:text-white service-card-icon"></i></div><h3 class="font-bold text-md md:text-lg text-gray-800 mb-1">حدائق</h3><p class="hidden sm:block text-sm text-gray-500">تصميم وصيانة.</p></div></a>
+                    <a href="services/moving-service.html" class="group block p-4 md:p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in-section"><div class="text-center"><div class="flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-100 mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-500"><i class="fa-solid fa-truck-moving fa-2x md:fa-3x text-blue-500 transition-all duration-300 group-hover:text-white service-card-icon"></i></div><h3 class="font-bold text-md md:text-lg text-gray-800 mb-1">نقل أثاث</h3><p class="hidden sm:block text-sm text-gray-500">نقل آمن.</p></div></a>
+                    <a href="services/flooring-service.html" class="group block p-4 md:p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in-section"><div class="text-center"><div class="flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-100 mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-500"><i class="fa-solid fa-layer-group fa-2x md:fa-3x text-blue-500 transition-all duration-300 group-hover:text-white service-card-icon"></i></div><h3 class="font-bold text-md md:text-lg text-gray-800 mb-1">أرضيات</h3><p class="hidden sm:block text-sm text-gray-500">تركيب سيراميك.</p></div></a>
+                    <a href="services/gypsum-service.html" class="group block p-4 md:p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in-section"><div class="text-center"><div class="flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-100 mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-500"><i class="fa-solid fa-ruler-combined fa-2x md:fa-3x text-blue-500 transition-all duration-300 group-hover:text-white service-card-icon"></i></div><h3 class="font-bold text-md md:text-lg text-gray-800 mb-1">جبس بورد</h3><p class="hidden sm:block text-sm text-gray-500">أسقف معلقة.</p></div></a>
+                    <a href="services/security-systems-service.html" class="group block p-4 md:p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in-section"><div class="text-center"><div class="flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-100 mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-500"><i class="fa-solid fa-video fa-2x md:fa-3x text-blue-500 transition-all duration-300 group-hover:text-white service-card-icon"></i></div><h3 class="font-bold text-md md:text-lg text-gray-800 mb-1">كاميرات</h3><p class="hidden sm:block text-sm text-gray-500">تأمين منزلك.</p></div></a>
+                    <a href="services/pest-control-service.html" class="group block p-4 md:p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in-section"><div class="text-center"><div class="flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-100 mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-500"><i class="fa-solid fa-bug fa-2x md:fa-3x text-blue-500 transition-all duration-300 group-hover:text-white service-card-icon"></i></div><h3 class="font-bold text-md md:text-lg text-gray-800 mb-1">مكافحة حشرات</h3><p class="hidden sm:block text-sm text-gray-500">حلول فعالة.</p></div></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="py-20 md:py-28 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in-section">
+                    <h2 class="text-3xl md:text-5xl font-bold text-gray-900">أحدث المقالات والنصائح</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">تابع مدونتنا للحصول على إرشادات مفيدة وأحدث الأخبار في عالم الصيانة المنزلية.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Blog Card 1 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in-section blog-card-animate">
+                        <a href="articles/importance-of-professional-plumbing.html" class="block">
+                            <img class="w-full h-56 object-cover" src="images/services/shatbli-plumbing-faucet-repair.webp" alt="سباك محترف يقوم بإصلاح صنبور مياه">
+                            <div class="p-6">
+                                <p class="text-sm text-blue-500 font-semibold">سباكة</p>
+                                <h3 class="mt-2 text-xl font-bold text-gray-900">أهمية السباكة الاحترافية: ما وراء إصلاح التسريبات</h3>
+                                <p class="mt-3 text-gray-600">لا تقتصر أعمال السباكة على إصلاح الأعطال الطارئة فقط، بل هي خط الدفاع الأول للحفاظ على سلامة الممتلكات...</p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Blog Card 2 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in-section blog-card-animate" style="transition-delay: 150ms;">
+                        <a href="articles/security-systems-guide.html" class="block">
+                            <img class="w-full h-56 object-cover" src="images/services/shatbli-security-camera-install.webp" alt="فني يقوم بتركيب كاميرا مراقبة">
+                            <div class="p-6">
+                                <p class="text-sm text-red-500 font-semibold">أنظمة أمنية</p>
+                                <h3 class="mt-2 text-xl font-bold text-gray-900">تأمين ممتلكاتك: كيف تختار نظام المراقبة الأنسب؟</h3>
+                                <p class="mt-3 text-gray-600">كاميرات المراقبة لم تعد رفاهية، بل هي ضرورة لراحة البال. اكتشف كيف تختار النظام المثالي لمنزلك أو عملك...</p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Blog Card 3 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in-section blog-card-animate" style="transition-delay: 300ms;">
+                        <a href="articles/the-art-of-finishing-and-painting.html" class="block">
+                            <img class="w-full h-56 object-cover" src="images/services/shatbli-painting-roller-wall.webp" alt="فني دهانات يقوم بطلاء جدار">
+                            <div class="p-6">
+                                <p class="text-sm text-purple-500 font-semibold">دهانات وتشطيبات</p>
+                                <h3 class="mt-2 text-xl font-bold text-gray-900">فن التشطيبات: كيف تحافظ على جمال منزلك؟</h3>
+                                <p class="mt-3 text-gray-600">الدهانات عالية الجودة وتقنيات التطبيق الاحترافية تضمن بقاء منزلك زاهياً ومقاوماً للعوامل الجوية...</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-16 text-center fade-in-section">
+                    <a href="blog.html" class="inline-block bg-blue-600 text-white px-10 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-xl">تصفح كل المقالات</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-us" class="py-20 md:py-28 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in-section">
+                    <h2 class="text-3xl md:text-5xl font-bold text-gray-900">لماذا تختار شطبلي؟</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">نحن نجمع بين الجودة، الأمانة، والاحترافية لنقدم لك أفضل تجربة.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center p-8 bg-gray-50 rounded-xl fade-in-section"><div class="flex justify-center items-center mb-5 w-20 h-20 rounded-full bg-green-100 mx-auto"><i class="fa-solid fa-user-check fa-3x text-green-600"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">فنيون معتمدون</h3><p class="text-gray-600">نختار أفضل الفنيين أصحاب الخبرة والكفاءة لضمان راحتك وأمانك.</p></div>
+                    <div class="text-center p-8 bg-gray-50 rounded-xl fade-in-section" style="transition-delay: 150ms;"><div class="flex justify-center items-center mb-5 w-20 h-20 rounded-full bg-green-100 mx-auto"><i class="fa-solid fa-hand-holding-dollar fa-3x text-green-600"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">أسعار تنافسية</h3><p class="text-gray-600">نقدم لك أسعاراً واضحة ومناسبة بدون أي تكاليف خفية أو مفاجآت.</p></div>
+                    <div class="text-center p-8 bg-gray-50 rounded-xl fade-in-section" style="transition-delay: 300ms;"><div class="flex justify-center items-center mb-5 w-20 h-20 rounded-full bg-green-100 mx-auto"><i class="fa-solid fa-shield-halved fa-3x text-green-600"></i></div><h3 class="text-xl font-bold text-gray-800 mb-2">ضمان على الخدمة</h3><p class="text-gray-600">نضمن لك جودة العمل المقدم ونقدم ضماناً حقيقياً على خدماتنا.</p></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="service-gallery" class="bg-gray-100 py-20 md:py-28">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in-section">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold text-gray-900">من أعمالنا</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">شاهد بنفسك جودة واحترافية خدماتنا على أرض الواقع.</p>
+                </div>
+                <div class="slider-container">
+                    <div class="slider-images">
+                        <div class="slider-slide"><img src="images/services/shatbli-carpentry-bookshelf-install.webp" alt="تركيب أثاث خشبي"><div class="slider-caption">نجار محترف يقوم بتركيب وتجميع قطعة أثاث خشبية بحرفية عالية.</div></div>
+                        <div class="slider-slide"><img src="images/services/shatbli-ac-unit-install.webp" alt="تركيب تكييف"><div class="slider-caption">فني تكييف وتبريد يقوم بتركيب أو صيانة الوحدة الخارجية لمكيف هواء.</div></div>
+                        <div class="slider-slide"><img src="images/services/shatbli-cleaning-floor-polishing.webp" alt="تلميع أرضيات"><div class="slider-caption">عامل متخصص يستخدم آلة تلميع أرضيات احترافية لإعادة اللمعان لأرضية رخامية.</div></div>
+                        <div class="slider-slide"><img src="images/services/shatbli-electricity-panel-work.webp" alt="فحص لوحة كهرباء"><div class="slider-caption">فني كهرباء يقوم بإجراء فحص دقيق للوحة تحكم كهربائية باستخدام ملتيميتر.</div></div>
+                        <div class="slider-slide"><img src="images/services/shatbli-moving-carrying-sofa.webp" alt="نقل أثاث"><div class="slider-caption">فريق عمل محترف يقوم بنقل قطعة أريكة بعناية فائقة لضمان سلامة المنقولات.</div></div>
+                        <div class="slider-slide"><img src="images/services/shatbli-gardening-planting-flowers.webp" alt="تنسيق حدائق"><div class="slider-caption">بستاني يقوم بالزراعة في حديقة خضراء منسقة، ويغرس شتلة زهور بعناية.</div></div>
+                        <div class="slider-slide"><img src="images/services/shatbli-gypsum-ceiling-install.webp" alt="تركيب جبس بورد"><div class="slider-caption">فني يقوم بتركيب سقف معلق من الجبس بتصميم هندسي معقد لإضافة لمسة جمالية.</div></div>
+                        <div class="slider-slide"><img src="images/services/shatbli-flooring-installing-tiles.webp" alt="تركيب أرضيات"><div class="slider-caption">فني متخصص يقوم بتركيب بلاط أرضيات أبيض كبير الحجم بدقة عالية.</div></div>
+                        <div class="slider-slide"><img src="images/services/shatbli-painting-preparation.webp" alt="أعمال النجارة المخصصة"><div class="slider-caption">نجار محترف في ورشة مجهزة، يقوم بصقل وتنعيم قطعة خشبية.</div></div>
+                        <div class="slider-slide"><img src="images/services/shatbli-plumbing-toilet-install.webp" alt="تركيب أدوات صحية"><div class="slider-caption">سباك محترف يقوم بتركيب مرحاض جديد بدقة واحترافية في حمام حديث.</div></div>
+                        <div class="slider-slide"><img src="images/services/shatbli-pest-control-exterior.webp" alt="مكافحة الحشرات الخارجية"><div class="slider-caption">فني متخصص يقوم برش محيط المبنى الخارجي لعمل حزام حماية يمنع دخول الآفات.</div></div>
+                        <div class="slider-slide"><img src="images/services/shatbli-security-camera-install.webp" alt="تركيب كاميرات مراقبة"><div class="slider-caption">فني يقوم بتركيب كاميرا مراقبة خارجية على جدار فيلا لرفع مستوى الأمان.</div></div>
+                    </div>
+                    <a class="slider-prev">&#10095;</a>
+                    <a class="slider-next">&#10094;</a>
+                </div>
+                <div class="thumbnail-gallery-container">
+                    <div class="flex items-center justify-center gap-2">
+                        <button id="thumb-scroll-next" class="thumb-scroll-btn">&#10094;</button>
+                        <div class="thumbnail-scroller"><div class="thumbnail-container"></div></div>
+                        <button id="thumb-scroll-prev" class="thumb-scroll-btn">&#10095;</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="bg-white py-20 md:py-28">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in-section">
+                    <h2 class="text-3xl md:text-5xl font-bold text-gray-900">ماذا يقول عملاؤنا عنا؟</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">شهادات نعتز بها من عملائنا الراضين عن خدماتنا.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-8 rounded-xl relative fade-in-section testimonial-card-animate">
+                        <i class="fa-solid fa-quote-right text-5xl text-blue-100 absolute top-4 left-4 -z-0"></i>
+                        <div class="relative z-10">
+                            <div class="flex items-center mb-4"><img class="w-14 h-14 rounded-full object-cover" src="https://placehold.co/100x100/e2e8f0/334155?text=أ" alt="صورة العميل أحمد محمود"><div class="mr-4"><p class="font-bold text-lg text-gray-800">أحمد محمود</p><div class="text-yellow-400 mt-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div></div>
+                            <p class="text-gray-600 leading-relaxed">"خدمة ممتازة وفني السباكة كان محترف جداً. حل المشكلة بسرعة وبدون أي فوضى. أنصح بهم بشدة."</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-xl relative fade-in-section testimonial-card-animate" style="transition-delay: 150ms;">
+                         <i class="fa-solid fa-quote-right text-5xl text-blue-100 absolute top-4 left-4 -z-0"></i>
+                        <div class="relative z-10">
+                            <div class="flex items-center mb-4"><img class="w-14 h-14 rounded-full object-cover" src="https://placehold.co/100x100/e2e8f0/334155?text=ف" alt="صورة العميلة فاطمة علي"><div class="mr-4"><p class="font-bold text-lg text-gray-800">فاطمة علي</p><div class="text-yellow-400 mt-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div></div></div>
+                            <p class="text-gray-600 leading-relaxed">"طلبت خدمة نقاشة وتشطيب الشقة، والنتيجة كانت أفضل من توقعاتي. التزام بالمواعيد وشغل نظيف جداً."</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-xl relative fade-in-section testimonial-card-animate" style="transition-delay: 300ms;">
+                         <i class="fa-solid fa-quote-right text-5xl text-blue-100 absolute top-4 left-4 -z-0"></i>
+                        <div class="relative z-10">
+                            <div class="flex items-center mb-4"><img class="w-14 h-14 rounded-full object-cover" src="https://placehold.co/100x100/e2e8f0/334155?text=م" alt="صورة العميل محمد إبراهيم"><div class="mr-4"><p class="font-bold text-lg text-gray-800">محمد إبراهيم</p><div class="text-yellow-400 mt-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div></div></div>
+                            <p class="text-gray-600 leading-relaxed">"تجربة جيدة جداً مع فني التكييف. قام بالصيانة اللازمة والجهاز يعمل بكفاءة الآن. شكراً شطبلي."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="bg-blue-600 text-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center py-20 md:py-24">
+                <h2 class="text-3xl md:text-5xl font-bold drop-shadow-lg fade-in-section">جاهز لترقية منزلك؟</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-blue-100 fade-in-section" style="transition-delay: 150ms;">تواصل معنا اليوم واحصل على معاينة واستشارة مجانية من أفضل الخبراء في مصر.</p>
+                <div class="mt-8 fade-in-section" style="transition-delay: 300ms;"><a href="contact.html" class="inline-block bg-white text-blue-600 px-10 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-transform transform hover:scale-105 shadow-xl">اطلب خدمتك الآن</a></div>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-right">
+                <div class="space-y-4">
+                    <a href="index.html" class="inline-block"><img class="h-16 w-auto mx-auto md:mx-0" src="images/logo.png" alt="شعار شطبلي" onerror="this.onerror=null; this.src='https://placehold.co/180x50/ffffff/334155?text=شطبلي';"></a>
+                    <p class="text-gray-400">منصتك الأولى لخدمات الصيانة والتشطيبات المنزلية في مصر. نسعى لراحتك وتوفير وقتك وجهدك.</p>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold">روابط سريعة</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="text-gray-400 hover:text-white">الخدمات</a></li>
+                        <li><a href="#blog" class="text-gray-400 hover:text-white">المدونة</a></li>
+                        <li><a href="#why-us" class="text-gray-400 hover:text-white">لماذا نحن؟</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">تواصل معنا</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold">تواصل معنا</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center justify-center md:justify-start"><i class="fa-solid fa-envelope ml-3"></i><span>contact@shattably.com</span></li>
+                        <li class="flex items-center justify-center md:justify-start"><i class="fa-solid fa-phone ml-3"></i><span>+20 123 456 7890</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 شطبلي. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" title="العودة للأعلى" class="hidden fixed bottom-5 left-5 bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all transform hover:scale-110 z-50 flex items-center justify-center">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Logic
+            const openBtn = document.getElementById('mobile-menu-button');
+            const closeBtn = document.getElementById('close-menu-button');
+            const sidebar = document.getElementById('mobile-sidebar');
+            const backdrop = document.getElementById('mobile-menu-backdrop');
+            const menuContainer = document.getElementById('mobile-menu-container');
+            const menuLinks = document.querySelectorAll('.mobile-menu-link');
+
+            const openMenu = () => {
+                menuContainer.style.display = 'block';
+                setTimeout(() => {
+                    backdrop.style.opacity = '1';
+                    sidebar.style.transform = 'translateX(0)';
+                }, 10);
+            };
+            const closeMenu = () => {
+                backdrop.style.opacity = '0';
+                sidebar.style.transform = 'translate-x-full';
+                setTimeout(() => {
+                    menuContainer.style.display = 'none';
+                }, 300);
+            };
+            openBtn.addEventListener('click', openMenu);
+            closeBtn.addEventListener('click', closeMenu);
+            backdrop.addEventListener('click', closeMenu);
+            menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+            // Scroll Animation Logic
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Scroll to Top Button Logic
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            window.onscroll = () => {
+                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    scrollTopBtn.classList.remove('hidden');
+                } else {
+                    scrollTopBtn.classList.add('hidden');
+                }
+            };
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Image Slider with Thumbnails Logic
+            let slideIndex = 1;
+            const slides = document.getElementsByClassName("slider-slide");
+            const thumbnailContainer = document.querySelector(".thumbnail-container");
+            const thumbScroller = document.querySelector(".thumbnail-scroller");
+            const thumbScrollPrevBtn = document.getElementById("thumb-scroll-prev");
+            const thumbScrollNextBtn = document.getElementById("thumb-scroll-next");
+
+            if (slides.length > 0 && thumbnailContainer) {
+                for (let i = 0; i < slides.length; i++) {
+                    const thumb = document.createElement('img');
+                    thumb.src = slides[i].getElementsByTagName('img')[0].src;
+                    thumb.className = 'thumbnail-img';
+                    thumb.alt = slides[i].getElementsByTagName('img')[0].alt;
+                    thumb.addEventListener('click', () => currentSlide(i + 1));
+                    thumbnailContainer.appendChild(thumb);
+                }
+                
+                const thumbnails = document.getElementsByClassName("thumbnail-img");
+                showSlides(slideIndex);
+
+                const prevButton = document.querySelector(".slider-prev");
+                const nextButton = document.querySelector(".slider-next");
+
+                prevButton.addEventListener("click", () => plusSlides(1));
+                nextButton.addEventListener("click", () => plusSlides(-1));
+
+                function plusSlides(n) { showSlides(slideIndex += n); }
+                function currentSlide(n) { showSlides(slideIndex = n); }
+
+                function showSlides(n) {
+                    if (n > slides.length) { slideIndex = 1 }    
+                    if (n < 1) { slideIndex = slides.length }
+                    
+                    for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+                    for (let i = 0; i < thumbnails.length; i++) { thumbnails[i].className = thumbnails[i].className.replace(" active", ""); }
+                    
+                    slides[slideIndex-1].style.display = "block";  
+                    thumbnails[slideIndex-1].className += " active";
+                    thumbnails[slideIndex-1].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    updateThumbScrollButtons();
+                }
+                
+                const scrollAmount = 250;
+                thumbScrollPrevBtn.addEventListener('click', () => { thumbScroller.scrollBy({ left: scrollAmount, behavior: 'smooth' }); });
+                thumbScrollNextBtn.addEventListener('click', () => { thumbScroller.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); });
+
+                function updateThumbScrollButtons() {
+                     setTimeout(() => {
+                        const { scrollWidth, clientWidth, scrollLeft } = thumbScroller;
+                        if (scrollWidth <= clientWidth) {
+                            thumbScrollPrevBtn.classList.add('hidden');
+                            thumbScrollNextBtn.classList.add('hidden');
+                            return;
+                        }
+                        const tolerance = 5;
+                        const atStart = scrollLeft <= tolerance;
+                        const atEnd = scrollLeft >= scrollWidth - clientWidth - tolerance;
+                        thumbScrollPrevBtn.classList.toggle('hidden', atEnd);
+                        thumbScrollNextBtn.classList.toggle('hidden', atStart);
+                    }, 150);
+                }
+
+                thumbScroller.addEventListener('scroll', updateThumbScrollButtons, { passive: true });
+                window.addEventListener('resize', updateThumbScrollButtons);
+                updateThumbScrollButtons();
+            }
+        });
+    </script>
+</body>
+</html>

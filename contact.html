@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تواصل معنا - شطبلي</title>
+    <meta name="description" content="تواصل مع فريق شطبلي. نحن هنا للإجابة على استفساراتك وتلقي طلباتك لجميع خدمات الصيانة والتشطيبات في مصر.">
+    <meta name="keywords" content="تواصل مع شطبلي, خدمة عملاء, طلب خدمة, استفسارات">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Google Fonts (Cairo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-24">
+                <div class="flex-shrink-0">
+                    <a href="index.html">
+                        <img class="h-20 w-auto" src="images/logo.png" alt="شعار شطبلي" onerror="this.onerror=null; this.src='https://placehold.co/200x80/007bff/ffffff?text=شطبلي';">
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <a href="index.html" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors">العودة للرئيسية</a>
+                </div>
+                 <div class="md:hidden">
+                    <a href="index.html" class="text-blue-600 hover:underline">العودة</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="bg-gray-100">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center py-16 md:py-20">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800">تواصل معنا</h1>
+                <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-600">نحن نسعد دائمًا بتلقي رسائلكم. سواء كان لديكم استفسار، اقتراح، أو رغبة في طلب خدمة، فريقنا جاهز للرد عليكم.</p>
+            </div>
+        </section>
+
+        <section class="py-16 md:py-24">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <!-- Contact Form -->
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800 mb-6">أرسل لنا رسالة</h2>
+                            <form action="#" method="POST">
+                                <div class="space-y-6">
+                                    <div>
+                                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">الاسم الكامل</label>
+                                        <input type="text" name="name" id="name" autocomplete="name" class="block w-full px-4 py-3 border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="اسمك">
+                                    </div>
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني</label>
+                                        <input type="email" name="email" id="email" autocomplete="email" class="block w-full px-4 py-3 border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="you@example.com">
+                                    </div>
+                                     <div>
+                                        <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">الموضوع</label>
+                                        <input type="text" name="subject" id="subject" class="block w-full px-4 py-3 border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="بخصوص...">
+                                    </div>
+                                    <div>
+                                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">رسالتك</label>
+                                        <textarea id="message" name="message" rows="4" class="block w-full px-4 py-3 border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="اكتب رسالتك هنا..."></textarea>
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                                            إرسال الرسالة
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Contact Info -->
+                        <div class="space-y-8">
+                             <h2 class="text-2xl font-bold text-gray-800">معلومات التواصل</h2>
+                             <div class="flex items-start space-x-4 space-x-reverse">
+                                 <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600">
+                                     <i class="fa-solid fa-phone fa-lg"></i>
+                                 </div>
+                                 <div>
+                                     <h3 class="text-lg font-semibold text-gray-800">عبر الهاتف</h3>
+                                     <p class="text-gray-600">تواصل معنا مباشرة لأي استفسار عاجل.</p>
+                                     <p class="text-lg font-semibold text-blue-600 mt-1" dir="ltr">+20 123 456 7890</p>
+                                 </div>
+                             </div>
+                             <div class="flex items-start space-x-4 space-x-reverse">
+                                 <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600">
+                                     <i class="fa-solid fa-envelope fa-lg"></i>
+                                 </div>
+                                 <div>
+                                     <h3 class="text-lg font-semibold text-gray-800">عبر البريد الإلكتروني</h3>
+                                     <p class="text-gray-600">أرسل لنا بريدًا وسنرد عليك في أقرب وقت.</p>
+                                     <p class="text-lg font-semibold text-blue-600 mt-1">contact@shattably.com</p>
+                                 </div>
+                             </div>
+                              <div class="flex items-start space-x-4 space-x-reverse">
+                                 <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600">
+                                     <i class="fa-solid fa-map-marker-alt fa-lg"></i>
+                                 </div>
+                                 <div>
+                                     <h3 class="text-lg font-semibold text-gray-800">مقرنا</h3>
+                                     <p class="text-gray-600">شارع الجمهورية، القاهرة، مصر</p>
+                                     <a href="#" class="text-blue-600 hover:text-blue-800 font-semibold mt-1 inline-block">عرض على الخريطة &larr;</a>
+                                 </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mt-8 border-t border-gray-700 pt-8">
+                <p>&copy; 2025 شطبلي. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
