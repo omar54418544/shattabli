@@ -146,13 +146,9 @@
                             <span class="step-number">5</span>
                             <span>رقم الهاتف للتواصل</span>
                         </label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-                                <span class="text-gray-500 font-mono">+20</span>
-                            </div>
-                            <input type="tel" id="phone-number" class="w-full p-3 pr-14 text-right font-mono tracking-wider bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="1X-XXXX-XXXX" required pattern="^(10|11|12|15)\d{8}$" title="من فضلك أدخل رقم هاتف مصري صحيح يبدأ بـ 010, 011, 012, أو 015">
-                        </div>
-                         <p id="phone-error" class="text-red-500 text-sm mt-1 hidden">رقم الهاتف غير صحيح. يجب أن يكون 10 أرقام ويبدأ بـ 10, 11, 12, أو 15.</p>
+                        <!-- UPDATED: Phone input to accept 11 digits -->
+                        <input type="tel" id="phone-number" class="w-full p-3 text-left font-mono tracking-wider bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="01012345678" required pattern="^0(10|11|12|15)\d{8}$" title="من فضلك أدخل رقم هاتف مصري صحيح مكون من 11 رقم ويبدأ بـ 010, 011, 012, أو 015">
+                        <p id="phone-error" class="text-red-500 text-sm mt-1 hidden">رقم الهاتف غير صحيح. يجب أن يكون 11 رقم ويبدأ بـ 010, 011, 012, أو 015.</p>
                     </div>
                 </div>
 
@@ -251,11 +247,16 @@
                 const description = document.getElementById('service-description').value;
                 const governorate = governorateSelect.value;
                 const address = document.getElementById('address').value;
-                const phone = phoneInput.value;
+                let phone = phoneInput.value;
                 
                 // Your WhatsApp number
                 const whatsAppNumber = "201070046660"; 
                 
+                // UPDATED: Remove leading '0' for international format
+                if (phone.startsWith('0')) {
+                    phone = phone.substring(1);
+                }
+
                 // Construct the message
                 let message = `*طلب خدمة جديد من موقع شطبلي*%0A%0A`;
                 message += `*الخدمة الرئيسية:* ${serviceType}%0A`;
@@ -265,7 +266,7 @@
                 message += `*الوصف:* ${description}%0A`;
                 message += `*المحافظة:* ${governorate}%0A`;
                 message += `*العنوان:* ${address}%0A`;
-                message += `*رقم هاتف العميل:* 20${phone}%0A%0A`;
+                message += `*رقم هاتف العميل:* +20${phone}%0A%0A`;
                 message += `تم إرسال هذا الطلب من خلال الموقع الإلكتروني.`;
 
                 const whatsappUrl = `https://wa.me/${whatsAppNumber}?text=${message}`;
