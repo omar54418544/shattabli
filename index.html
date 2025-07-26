@@ -190,18 +190,6 @@
             transform: translateY(-8px);
             box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
         }
-        /* Dropdown styles */
-        .dropdown .dropdown-menu {
-            display: none;
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-            transform: translateY(10px);
-            opacity: 0;
-        }
-        .dropdown:hover .dropdown-menu {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -221,12 +209,13 @@
                     <a href="#services" class="text-gray-700 hover:text-blue-600 text-md font-semibold nav-link-animate">خدماتنا</a>
                     <a href="#blog" class="text-gray-700 hover:text-blue-600 text-md font-semibold nav-link-animate">المدونة</a>
                     <a href="#why-us" class="text-gray-700 hover:text-blue-600 text-md font-semibold nav-link-animate">لماذا نحن؟</a>
+                    <a href="join-technician.html" class="text-gray-700 hover:text-blue-600 text-md font-semibold nav-link-animate">انضم كفني</a>
                     <a href="contact.html" class="text-gray-700 hover:text-blue-600 text-md font-semibold nav-link-animate">تواصل معنا</a>
                 </div>
                 
                 <!-- CTA Button -->
                 <div class="hidden md:block">
-                    <a href="#" class="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow hover:shadow-lg transform hover:-translate-y-0.5">اطلب خدمة الآن</a>
+                    <a href="order-service.html" class="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow hover:shadow-lg transform hover:-translate-y-0.5">اطلب خدمة الآن</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -256,10 +245,11 @@
                             <a href="#services" class="mobile-menu-link flex items-center gap-x-3 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-100 hover:text-blue-600"><i class="fa-solid fa-wrench w-5 text-center text-gray-500"></i> خدماتنا</a>
                             <a href="#blog" class="mobile-menu-link flex items-center gap-x-3 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-100 hover:text-blue-600"><i class="fa-solid fa-newspaper w-5 text-center text-gray-500"></i> المدونة</a>
                             <a href="#why-us" class="mobile-menu-link flex items-center gap-x-3 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-100 hover:text-blue-600"><i class="fa-solid fa-circle-question w-5 text-center text-gray-500"></i> لماذا نحن؟</a>
+                            <a href="join-technician.html" class="mobile-menu-link flex items-center gap-x-3 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-100 hover:text-blue-600"><i class="fa-solid fa-user-plus w-5 text-center text-gray-500"></i> انضم كفني</a>
                             <a href="contact.html" class="mobile-menu-link flex items-center gap-x-3 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-800 hover:bg-gray-100 hover:text-blue-600"><i class="fa-solid fa-envelope w-5 text-center text-gray-500"></i> تواصل معنا</a>
                         </div>
                         <div class="py-6">
-                            <a href="#" class="block w-full text-center bg-blue-600 text-white px-5 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg">اطلب خدمة الآن</a>
+                            <a href="order-service.html" class="block w-full text-center bg-blue-600 text-white px-5 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg">اطلب خدمة الآن</a>
                         </div>
                     </div>
                 </div>
@@ -282,7 +272,6 @@
                     <h2 class="text-3xl md:text-5xl font-bold text-gray-900">خدمات شطبلي المتكاملة</h2>
                     <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">ابحث عن الخدمة التي تحتاجها بسهولة وسرعة في جميع أنحاء مصر.</p>
                 </div>
-                <!-- Services Grid: Changed to 3 columns on mobile -->
                 <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-8">
                     <a href="services/plumbing-service.html" class="group block p-4 md:p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in-section"><div class="text-center"><div class="flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-100 mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-500"><i class="fa-solid fa-wrench fa-2x md:fa-3x text-blue-500 transition-all duration-300 group-hover:text-white service-card-icon"></i></div><h3 class="font-bold text-md md:text-lg text-gray-800 mb-1">سباكة</h3><p class="hidden sm:block text-sm text-gray-500">تأسيس وإصلاح.</p></div></a>
                     <a href="services/electricity-service.html" class="group block p-4 md:p-6 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in-section"><div class="text-center"><div class="flex items-center justify-center h-16 w-16 md:h-20 md:w-20 rounded-full bg-blue-100 mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-500"><i class="fa-solid fa-bolt fa-2x md:fa-3x text-blue-500 transition-all duration-300 group-hover:text-white service-card-icon"></i></div><h3 class="font-bold text-md md:text-lg text-gray-800 mb-1">كهرباء</h3><p class="hidden sm:block text-sm text-gray-500">حلول آمنة.</p></div></a>
@@ -433,7 +422,7 @@
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center py-20 md:py-24">
                 <h2 class="text-3xl md:text-5xl font-bold drop-shadow-lg fade-in-section">جاهز لترقية منزلك؟</h2>
                 <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-blue-100 fade-in-section" style="transition-delay: 150ms;">تواصل معنا اليوم واحصل على معاينة واستشارة مجانية من أفضل الخبراء في مصر.</p>
-                <div class="mt-8 fade-in-section" style="transition-delay: 300ms;"><a href="contact.html" class="inline-block bg-white text-blue-600 px-10 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-transform transform hover:scale-105 shadow-xl">اطلب خدمتك الآن</a></div>
+                <div class="mt-8 fade-in-section" style="transition-delay: 300ms;"><a href="order-service.html" class="inline-block bg-white text-blue-600 px-10 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-transform transform hover:scale-105 shadow-xl">اطلب خدمتك الآن</a></div>
             </div>
         </section>
     </main>
@@ -456,8 +445,8 @@
                 <div class="space-y-4">
                     <h4 class="text-lg font-semibold">تواصل معنا</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li class="flex items-center justify-center md:justify-start"><i class="fa-solid fa-envelope ml-3"></i><span>contact@shattably.com</span></li>
-                        <li class="flex items-center justify-center md:justify-start"><i class="fa-solid fa-phone ml-3"></i><span>+20 123 456 7890</span></li>
+                        <li class="flex items-center justify-center md:justify-start"><i class="fa-solid fa-envelope ml-3"></i><span>contact@shatabli.com</span></li>
+                        <li class="flex items-center justify-center md:justify-start"><i class="fa-solid fa-phone ml-3"></i><span dir="ltr">+20 107 004 6660</span></li>
                     </ul>
                 </div>
             </div>
@@ -474,6 +463,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Ensure page loads at the top
+            window.scrollTo(0, 0);
+
             // Mobile Menu Logic
             const openBtn = document.getElementById('mobile-menu-button');
             const closeBtn = document.getElementById('close-menu-button');
@@ -499,7 +491,15 @@
             openBtn.addEventListener('click', openMenu);
             closeBtn.addEventListener('click', closeMenu);
             backdrop.addEventListener('click', closeMenu);
-            menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+            menuLinks.forEach(link => {
+                if (link.href && link.href.includes('#')) {
+                    link.addEventListener('click', () => {
+                        setTimeout(closeMenu, 100);
+                    });
+                } else {
+                    link.addEventListener('click', closeMenu);
+                }
+            });
 
             // Scroll Animation Logic
             const observer = new IntersectionObserver((entries) => {
@@ -566,7 +566,11 @@
                     
                     slides[slideIndex-1].style.display = "block";  
                     thumbnails[slideIndex-1].className += " active";
-                    thumbnails[slideIndex-1].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    
+                    // FIXED: The following line was causing the page to scroll down.
+                    // It is now commented out to prevent this behavior.
+                    // thumbnails[slideIndex-1].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    
                     updateThumbScrollButtons();
                 }
                 

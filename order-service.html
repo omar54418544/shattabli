@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اطلب خدمة جديدة - شطبلي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f3f4f6; /* Lighter gray background */
+        }
+        .form-section {
+            transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-in-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: translateY(-10px);
+        }
+        .form-section.active {
+            max-height: 500px; /* Adjust as needed */
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .step-number {
+            background-color: #3b82f6; /* Blue-500 */
+            color: white;
+            border-radius: 50%;
+            width: 2.25rem;
+            height: 2.25rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem; /* 12px */
+        }
+        input, select, textarea {
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="index.html">
+                <img class="h-14 w-auto" src="images/logo.png" alt="شعار شطبلي" onerror="this.onerror=null; this.src='https://placehold.co/150x50/007bff/ffffff?text=شطبلي';">
+            </a>
+            <a href="index.html" class="text-sm font-semibold text-gray-600 hover:text-blue-600 transition-colors duration-200 flex items-center gap-2">
+                <i class="fas fa-home"></i>
+                <span>العودة للرئيسية</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <div class="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-6 sm:p-8 md:p-10">
+            <div class="text-center mb-10">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800">طلب خدمة جديدة</h1>
+                <p class="text-gray-500 mt-3">املأ النموذج التالي خطوة بخطوة، وسيتم تجهيز طلبك لإرساله عبر واتساب.</p>
+            </div>
+
+            <!-- Success Message -->
+            <div id="success-message" class="hidden bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg mb-6" role="alert">
+                <p class="font-bold">تم بنجاح!</p>
+                <p>تم فتح واتساب لإرسال رسالتك. يمكنك الآن إرسال طلب آخر إذا أردت.</p>
+            </div>
+
+            <form id="order-form">
+                <div class="space-y-8">
+                    <!-- Step 1: Main Service Type -->
+                    <div>
+                        <label for="service-type" class="block text-lg font-semibold text-gray-700 mb-3">
+                            <span class="step-number">1</span>
+                            <span>اختر الخدمة الرئيسية</span>
+                        </label>
+                        <select id="service-type" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                            <option value="" disabled selected>-- من فضلك اختر نوع الخدمة --</option>
+                            <option value="سباكة">سباكة</option>
+                            <option value="كهرباء">كهرباء</option>
+                            <option value="نقاشة ودهان">نقاشة ودهان</option>
+                            <option value="نجارة">نجارة</option>
+                            <option value="تكييف وتبريد">تكييف وتبريد</option>
+                            <option value="نظافة">نظافة</option>
+                            <option value="تنسيق حدائق">تنسيق حدائق</option>
+                            <option value="نقل أثاث">نقل أثاث</option>
+                            <option value="تركيب أرضيات">تركيب أرضيات</option>
+                            <option value="جبس بورد">جبس بورد</option>
+                            <option value="كاميرات مراقبة">كاميرات مراقبة</option>
+                            <option value="مكافحة حشرات">مكافحة حشرات</option>
+                            <option value="أخرى">أخرى</option>
+                        </select>
+                    </div>
+
+                    <!-- Step 2: Sub-Service (Dynamically shown) -->
+                    <div id="sub-service-wrapper" class="form-section">
+                        <label for="sub-service-type" class="block text-lg font-semibold text-gray-700 mb-3">
+                            <span class="step-number">2</span>
+                            <span>حدد الخدمة المطلوبة بدقة</span>
+                        </label>
+                        <select id="sub-service-type" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <!-- Options will be populated by JS -->
+                        </select>
+                    </div>
+
+                    <!-- Step 3: Service Description -->
+                    <div>
+                        <label for="service-description" class="block text-lg font-semibold text-gray-700 mb-3">
+                             <span class="step-number">3</span>
+                             <span>صف لنا المشكلة أو الطلب</span>
+                        </label>
+                        <textarea id="service-description" rows="5" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="مثال: يوجد تسريب مياه أسفل حوض المطبخ، أحتاج إلى إصلاحه في أسرع وقت..." required></textarea>
+                    </div>
+
+                    <!-- Step 4: Location Info -->
+                    <div>
+                        <label class="block text-lg font-semibold text-gray-700 mb-3">
+                             <span class="step-number">4</span>
+                             <span>أخبرنا عن عنوانك</span>
+                        </label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+                            <select id="governorate" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                                <option value="" disabled selected>-- اختر المحافظة --</option>
+                                <!-- Options will be populated by JS -->
+                            </select>
+                            <input type="text" id="address" class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="الحي، الشارع، رقم العقار..." required>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Phone Number -->
+                    <div>
+                        <label for="phone-number" class="block text-lg font-semibold text-gray-700 mb-3">
+                            <span class="step-number">5</span>
+                            <span>رقم الهاتف للتواصل</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                                <span class="text-gray-500 font-mono">+20</span>
+                            </div>
+                            <input type="tel" id="phone-number" class="w-full p-3 pr-14 text-right font-mono tracking-wider bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="1X-XXXX-XXXX" required pattern="^(10|11|12|15)\d{8}$" title="من فضلك أدخل رقم هاتف مصري صحيح يبدأ بـ 010, 011, 012, أو 015">
+                        </div>
+                         <p id="phone-error" class="text-red-500 text-sm mt-1 hidden">رقم الهاتف غير صحيح. يجب أن يكون 10 أرقام ويبدأ بـ 10, 11, 12, أو 15.</p>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="mt-10 border-t pt-8">
+                    <button type="submit" id="submit-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-4 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3">
+                        <i class="fab fa-whatsapp fa-lg"></i>
+                        <span>إرسال الطلب عبر واتساب</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Form Data ---
+            const subServicesData = {
+                'سباكة': ['تأسيس سباكة شقة/فيلا', 'إصلاح تسريب مياه', 'تسليك مجاري وبالوعات', 'تركيب سخان (غاز/كهرباء)', 'تركيب خلاطات ودش', 'تركيب قاعدة حمام وحوض', 'تركيب غسالة أطباق/ملابس', 'تغيير مواسير قديمة', 'أخرى (يرجى التوضيح في الوصف)'],
+                'كهرباء': ['تأسيس كهرباء شقة/فيلا', 'إصلاح قفلة (شورت)', 'تركيب نجف وإضاءة حديثة', 'تغيير لوحة مفاتيح (قواطع)', 'تركيب فيش وبرايز', 'تمديد وصلات كهربائية', 'تركيب جرس باب أو انتركم', 'أخرى (يرجى التوضيح في الوصف)'],
+                'نقاشة ودهان': ['دهان شقة بالكامل (بلاستيك/زيت)', 'دهان غرفة واحدة', 'أعمال معجون وصنفرة للحوائط', 'دهانات ديكورية (قطيفة، ستوكو، إلخ)', 'دهان أبواب وشبابيك', 'معالجة رطوبة وشروخ الحوائط', 'أخرى (يرجى التوضيح في الوصف)'],
+                'نجارة': ['تركيب أبواب وشبابيك', 'إصلاح أو تغيير كالون باب', 'إصلاح أثاث (سرير، دولاب، كراسي)', 'تجميع وتركيب أثاث جديد (ايكيا وغيرها)', 'تفصيل مطابخ خشبية', 'تفصيل غرف نوم', 'أخرى (يرجى التوضيح في الوصف)'],
+                'تكييف وتبريد': ['تركيب تكييف جديد', 'فك ونقل تكييف', 'صيانة دورية وتنظيف', 'شحن فريون', 'إصلاح تسريب مياه من التكييف', 'إصلاح أعطال التبريد', 'أخرى (يرجى التوضيح في الوصف)'],
+                'نظافة': ['تنظيف شقة/فيلا بعد التشطيب', 'تنظيف عميق للمنازل', 'تنظيف سجاد وموكيت', 'تنظيف وتلميع أثاث', 'تنظيف واجهات زجاجية', 'تنظيف خزانات مياه', 'أخرى (يرجى التوضيح في الوصف)'],
+                'تنسيق حدائق': ['تصميم وتنسيق حدائق', 'تقليم أشجار وشجيرات', 'تركيب شبكات ري (عادي/أوتوماتيك)', 'توريد وزراعة نباتات وأشجار', 'مكافحة آفات نباتية', 'أخرى (يرجى التوضيح في الوصف)'],
+                'نقل أثاث': ['نقل أثاث داخل نفس المدينة', 'نقل أثاث بين المحافظات', 'خدمات فك وتركيب الأثاث', 'تغليف احترافي للمنقولات', 'رفع الأثاث بالونش', 'أخرى (يرجى التوضيح في الوصف)'],
+                'تركيب أرضيات': ['تركيب سيراميك وبورسلين', 'تركيب رخام وجرانيت', 'تركيب أرضيات HDF', 'تركيب باركيه', 'تركيب فينيل', 'أخرى (يرجى التوضيح في الوصف)'],
+                'جبس بورد': ['تركيب أسقف معلقة (فلات)', 'تركيب بيوت نور وكرانيش', 'بناء قواطع جدارية', 'تصميم وتنفيذ مكتبات جبسية', 'أخرى (يرجى التوضيح في الوصف)'],
+                'كاميرات مراقبة': ['تركيب نظام كاميرات مراقبة جديد', 'صيانة وتحديث نظام قائم', 'ربط الكاميرات بالهاتف والمشاهدة عن بعد', 'تركيب أنظمة انتركم مرئي', 'أخرى (يرجى التوضيح في الوصف)'],
+                'مكافحة حشرات': ['مكافحة الصراصير والنمل', 'مكافحة بق الفراش', 'مكافحة القوارض (فئران)', 'مكافحة الحشرات الطائرة (ناموس وذباب)', 'أخرى (يرجى التوضيح في الوصف)'],
+            };
+            const governorates = ["القاهرة", "الجيزة", "الأسكندرية", "الدقهلية", "البحر الأحمر", "الأقصر", "أسوان", "أسيوط", "البحيرة", "بني سويف", "بورسعيد", "دمياط", "الشرقية", "الغربية", "الإسماعيلية", "كفر الشيخ", "المنوفية", "المنيا", "مطروح", "شمال سيناء", "قنا", "القليوبية", "سوهاج", "جنوب سيناء", "السويس", "الوادي الجديد", "الفيوم"];
+
+            // --- Element References ---
+            const orderForm = document.getElementById('order-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const serviceTypeSelect = document.getElementById('service-type');
+            const subServiceWrapper = document.getElementById('sub-service-wrapper');
+            const subServiceSelect = document.getElementById('sub-service-type');
+            const governorateSelect = document.getElementById('governorate');
+            const successMessage = document.getElementById('success-message');
+            const phoneInput = document.getElementById('phone-number');
+            const phoneError = document.getElementById('phone-error');
+
+            // --- Populate Governorates ---
+            governorates.forEach(gov => {
+                const option = document.createElement('option');
+                option.value = gov;
+                option.textContent = gov;
+                governorateSelect.appendChild(option);
+            });
+
+            // --- Dynamic Sub-services ---
+            serviceTypeSelect.addEventListener('change', (e) => {
+                const selectedService = e.target.value;
+                const services = subServicesData[selectedService];
+                subServiceSelect.innerHTML = '';
+                if (services && services.length > 0) {
+                    const placeholder = document.createElement('option');
+                    placeholder.value = "";
+                    placeholder.textContent = "-- حدد الخدمة المطلوبة --";
+                    placeholder.disabled = true;
+                    placeholder.selected = true;
+                    subServiceSelect.appendChild(placeholder);
+                    services.forEach(service => {
+                        const option = document.createElement('option');
+                        option.value = service;
+                        option.textContent = service;
+                        subServiceSelect.appendChild(option);
+                    });
+                    subServiceWrapper.classList.add('active');
+                } else {
+                    subServiceWrapper.classList.remove('active');
+                }
+            });
+
+            // --- Form Submission ---
+            orderForm.addEventListener('submit', e => {
+                e.preventDefault();
+                
+                // Validate phone number
+                if (!phoneInput.checkValidity()) {
+                    phoneError.classList.remove('hidden');
+                    phoneInput.focus();
+                    return;
+                }
+                phoneError.classList.add('hidden');
+
+                // Disable button and show loading state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin fa-lg"></i><span>جاري تجهيز رسالتك...</span>';
+
+                // Collect form data
+                const serviceType = serviceTypeSelect.value;
+                const subService = subServiceSelect.value;
+                const description = document.getElementById('service-description').value;
+                const governorate = governorateSelect.value;
+                const address = document.getElementById('address').value;
+                const phone = phoneInput.value;
+                
+                // Your WhatsApp number
+                const whatsAppNumber = "201070046660"; 
+                
+                // Construct the message
+                let message = `*طلب خدمة جديد من موقع شطبلي*%0A%0A`;
+                message += `*الخدمة الرئيسية:* ${serviceType}%0A`;
+                if (subService) {
+                    message += `*الخدمة الفرعية:* ${subService}%0A`;
+                }
+                message += `*الوصف:* ${description}%0A`;
+                message += `*المحافظة:* ${governorate}%0A`;
+                message += `*العنوان:* ${address}%0A`;
+                message += `*رقم هاتف العميل:* 20${phone}%0A%0A`;
+                message += `تم إرسال هذا الطلب من خلال الموقع الإلكتروني.`;
+
+                const whatsappUrl = `https://wa.me/${whatsAppNumber}?text=${message}`;
+
+                // Open WhatsApp
+                window.open(whatsappUrl, '_blank');
+                
+                // Show success message and reset form
+                successMessage.classList.remove('hidden');
+                orderForm.reset();
+                subServiceWrapper.classList.remove('active');
+                window.scrollTo(0, 0);
+
+                // Re-enable button after a delay
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fab fa-whatsapp fa-lg"></i><span>إرسال طلب آخر عبر واتساب</span>';
+                }, 3000);
+            });
+            
+            // Real-time phone validation feedback
+            phoneInput.addEventListener('input', () => {
+                if (phoneInput.checkValidity()) {
+                    phoneError.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
